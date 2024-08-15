@@ -1,34 +1,45 @@
-const inputBox = document.getElementById("input-box");
-const listContainer = document.getElementById("list-container");
-const alertMessage = document.querySelector(".alert");
+// variables
+const button = document.querySelector(".button");
 
-const addTask = () => {
+const inputBox = document.querySelector("#input-box");
+const list = document.querySelector("#list-container");
+
+const allertMessage = document.querySelector(".alert");
+
+
+// function that creates "to do" text
+const createText = () => {
+
     if (inputBox.value === ""){
-        alertMessage.style.display = "block";
+        allertMessage.style.display = "block";
     } else {
-        alertMessage.style.display = "none";
-        let li = document.createElement("li");
-        li.innerHTML = inputBox.value;
-        listContainer.appendChild(li);
+        allertMessage.style.display = "none";
 
-        let span = document.createElement("span");
-        span.innerHTML = "\u00d7";
-        li.appendChild(span);
-    }
+        createListItem();
+    };
     inputBox.value = "";
-    saveData();
-}
+};
 
-listContainer.addEventListener("click", (e)=> {
-    if (e.target.tagName === "LI"){
-        e.target.classList.toggle("checked");
-        saveData();
-    } else if (e.target.tagName === "SPAN"){
-        e.target.parentElement.remove();
-        saveData();
+const createListItem = () => {
+    let li = document.createElement("li");
+    li.innerHTML = inputBox.value;
+    list.appendChild(li);
+
+    let span = document.createElement("span");
+    span.innerHTML = "\u00d7";
+    li.appendChild(span);
+};
+
+list.addEventListener("click", (event) => {
+    if(event.target.tagName === "LI"){
+        event.target.classList.toggle("checked");
+    } else if (event.target.tagName === "SPAN"){
+        event.target.parentElement.remove();
     }
 });
 
-const saveData = () => {
-    localStorage.setItem("data", listContainer.innerHTML);
-}
+
+button.addEventListener("click", ()=> {
+    // add functions 
+    createText();
+});
