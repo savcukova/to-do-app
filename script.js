@@ -40,6 +40,5 @@ list.addEventListener("click", (event) => {
 
 
 button.addEventListener("click", ()=> {
-    // add functions 
     createText();
 });
